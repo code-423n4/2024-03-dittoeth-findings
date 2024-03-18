@@ -1,0 +1,8 @@
+{
+  "contest": 348,
+  "handle": "0xgh0stcybers3c",
+  "risk": "3",
+  "title": "Insufficient Validation of Bid Parameters as seen on `line 86-87` of the `BidOrdersFacet.sol`,Leading to Potential DoS Attack",
+  "issueId": 11,
+  "issueUrl": "https://github.com/code-423n4/2024-03-dittoeth-findings/issues/11"
+}
