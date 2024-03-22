@@ -1,0 +1,8 @@
+{
+  "contest": 348,
+  "handle": "is0l4te",
+  "risk": "3",
+  "title": "claimRedemption does not check shortOrder status, attacker can steal fund from protocol",
+  "issueId": 16,
+  "issueUrl": "https://github.com/code-423n4/2024-03-dittoeth-findings/issues/16"
+}
