@@ -1,0 +1,8 @@
+{
+  "contest": 348,
+  "handle": "0xEllipticCurve",
+  "risk": "3",
+  "title": "Precision loss due to incorrect calculation.",
+  "issueId": 19,
+  "issueUrl": "https://github.com/code-423n4/2024-03-dittoeth-findings/issues/19"
+}
