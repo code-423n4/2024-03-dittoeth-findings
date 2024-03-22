@@ -1,0 +1,8 @@
+{
+  "contest": 348,
+  "handle": "Livinghacker001",
+  "risk": "2",
+  "title": "Inadequate Validation in safeTransferFrom Function for ERC721 Tokens",
+  "issueId": 20,
+  "issueUrl": "https://github.com/code-423n4/2024-03-dittoeth-findings/issues/20"
+}
