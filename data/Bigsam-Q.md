@@ -254,4 +254,68 @@ By representing ether in `wei`, the code adheres to the standard arithmetic prac
 
 --- 
 
+Certainly, here is the revised report:
 
+---
+
+## [L-05] Report: Inconsistency in depositEth Function
+
+### Summary
+
+The `depositEth` function in the `bridgefacet` contract is designed to interact with the `depositEth` function in the `IBridge` interface. However, the `depositEth` function in the interface is designed to accept no parameters but the contract implementation is sending the `bridge` address as a parameter. This discrepancy could lead to a potential vulnerability or misbehavior in the protocol.
+
+### Github code
+1. https://github.com/code-423n4/2024-03-dittoeth/blob/91faf46078bb6fe8ce9f55bcb717e5d2d302d22e/contracts/facets/BridgeRouterFacet.sol#L82-L91
+2. https://github.com/code-423n4/2024-03-dittoeth/blob/91faf46078bb6fe8ce9f55bcb717e5d2d302d22e/contracts/interfaces/IBridge.sol#L12
+
+
+#### Code Snippet from `bridgefacet`:
+
+```solidity
+/**
+ * @notice Deposit ETH into the protocol
+ * @dev User receives equivalent value in dETH at a 1:1 ratio, and withdrawal credit if applicable
+ *
+ * @param bridge The address of the bridge corresponding to the LST deposited (via ETH exchange)
+ *
+ */
+function depositEth(address bridge) external payable nonReentrant {
+    if (msg.value < C.MIN_DEPOSIT) revert Errors.UnderMinimumDeposit();
+
+    (uint256 vault, uint256 bridgePointer) = _getVault(bridge);
+
+    uint88 dethAmount = uint88(IBridge(bridge).depositEth{value: msg.value}()); // Assumes 1 ETH = 1 DETH
+    vault.addDeth(bridgePointer, dethAmount);
+    maybeUpdateYield(vault, dethAmount);
+    emit Event ..
+}
+```
+
+#### Code Snippet from `IBridge` Interface:
+
+```solidity
+interface IBridge {
+    ...
+    function depositEth() external payable returns (uint256);
+    ...
+}
+```
+
+### Issue
+
+The `depositEth` function in the `bridgefacet` contract is incorrectly passing the `bridge` address as a parameter when interacting with the `IBridge` interface. The `depositEth` function in the `IBridge` interface is supposed to accept no parameters. This inconsistency could lead to unexpected behavior or vulnerabilities.
+
+
+
+### Mitigation
+
+To mitigate this issue, the contract should either:
+
+1. Rename the `depositEth` function in the `bridgefacet` contract to `depositEthWithBridgeAddress` and pass the `bridge` address as a parameter.
+2. Or, correct the `depositEth` function in the `bridgefacet` contract to match the interface by removing the `bridge` address parameter.
+
+### Recommendation
+
+It is recommended to update the code to maintain consistency between the `bridgefacet` contract and the `IBridge` interface to ensure the correct and secure functioning of the protocol.
+
+---
