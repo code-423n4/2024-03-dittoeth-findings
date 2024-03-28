@@ -319,3 +319,160 @@ To mitigate this issue, the contract should either:
 It is recommended to update the code to maintain consistency between the `bridgefacet` contract and the `IBridge` interface to ensure the correct and secure functioning of the protocol.
 
 ---
+
+
+## [L-06] Missing Update of colUsed in matchTotal struct in matchlowestSell Function
+---
+
+https://github.com/code-423n4/2024-03-dittoeth/blob/91faf46078bb6fe8ce9f55bcb717e5d2d302d22e/contracts/facets/BidOrdersFacet.sol#L215-L262
+## Impact
+Failure to update the `colUsed` in the `matchTotal` struct can lead to incorrect calculations and potential loss of funds or undesired behavior in the contract's operations that rely on this parameter.
+
+
+### Code Vulnerability
+```solidity
+    /**
+     * @notice Settles lowest ask and updates incoming bid
+     * @dev DittoMatchedShares only assigned for asks sitting > 2 weeks of seconds
+     *
+     * @param asset The market that will be impacted
+     * @param lowestSell Lowest sell order (ask or short) on market
+     * @param incomingBid Active bid order
+     * @param matchTotal Struct of the running matched totals
+     */
+
+    function matchlowestSell(
+        address asset,
+        STypes.Order memory lowestSell,
+        STypes.Order memory incomingBid,
+        MTypes.Match memory matchTotal
+    ) private {
+        uint88 fillErc = incomingBid.ercAmount > lowestSell.ercAmount ? lowestSell.ercAmount : incomingBid.ercAmount;
+        uint88 fillEth = lowestSell.price.mulU88(fillErc);
+
+        if (lowestSell.orderType == O.LimitShort) {
+            // Match short
+            uint88 colUsed = fillEth.mulU88(LibOrders.convertCR(lowestSell.shortOrderCR));
+            LibOrders.increaseSharesOnMatch(asset, lowestSell, matchTotal, colUsed);
+            uint88 shortFillEth = fillEth + colUsed;
+            matchTotal.shortFillEth += shortFillEth;
+            // Saves gas when multiple shorts are matched
+            if (!matchTotal.ratesQueried) {
+                STypes.Asset storage Asset = s.asset[asset];
+                matchTotal.ratesQueried = true;
+                matchTotal.ercDebtRate = Asset.ercDebtRate;
+                matchTotal.dethYieldRate = s.vault[Asset.vault].dethYieldRate;
+            }
+            // Default enum is PartialFill
+            SR status;
+            if (incomingBid.ercAmount >= lowestSell.ercAmount) {
+                status = SR.FullyFilled;
+            }
+
+            LibShortRecord.fillShortRecord(
+                asset,
+                lowestSell.addr,
+                lowestSell.shortRecordId,
+                status,
+                shortFillEth,
+                fillErc,
+                matchTotal.ercDebtRate,
+                matchTotal.dethYieldRate
+                 );
+        } else {
+            // Match ask
+            s.vaultUser[s.asset[asset].vault][lowestSell.addr].ethEscrowed += fillEth;
+            matchTotal.askFillErc += fillErc;
+        }
+
+        matchTotal.fillErc += fillErc;
+        matchTotal.fillEth += fillEth;
+        matchTotal.lastMatchPrice = lowestSell.price;
+    }
+
+```
+in the code matchtotal updates all value in the match struct but omits colused  
+
+```solidity
+struct Match {
+        uint88 fillEth;
+        uint88 fillErc;
+        uint88 colUsed;
+        uint88 dittoMatchedShares;
+        uint80 lastMatchPrice;
+        // Below used only for bids
+        uint88 shortFillEth; // Includes colUsed + fillEth from shorts
+        uint96 askFillErc; // Subset of fillErc
+        bool ratesQueried; // Save gas when matching shorts
+        uint80 dethYieldRate;
+        uint64 ercDebtRate;
+    }
+
+```
+
+
+## Tools Used
+Manual code analysis.
+
+## Recommended Mitigation Steps
+It is essential to always ensure that all the relevant parameters in a struct are correctly updated to avoid vulnerabilities and maintain the contract's integrity and security. The mitigation includes updating the `matchTotal.colUsed` with the calculated `colUsed` value.
+
+### Mitigated Code
+```solidity
+function matchlowestSell(
+    address asset,
+    STypes.Order memory lowestSell,
+    STypes.Order memory incomingBid,
+    MTypes.Match memory matchTotal
+) private {
+    uint88 fillErc = incomingBid.ercAmount > lowestSell.ercAmount ? lowestSell.ercAmount : incomingBid.ercAmount;
+    uint88 fillEth = lowestSell.price.mulU88(fillErc);
+
+    if (lowestSell.orderType == O.LimitShort) {
+        // Match short
+        uint88 colUsed = fillEth.mulU88(LibOrders.convertCR(lowestSell.shortOrderCR));
+        LibOrders.increaseSharesOnMatch(asset, lowestSell, matchTotal, colUsed);
+        uint88 shortFillEth = fillEth + colUsed;
+        matchTotal.shortFillEth += shortFillEth;
+
+        // Updated code to fix the vulnerability
+   ++   matchTotal.colUsed += colUsed;
+
+        // Saves gas when multiple shorts are matched
+        if (!matchTotal.ratesQueried) {
+            STypes.Asset storage Asset = s.asset[asset];
+            matchTotal.ratesQueried = true;
+            matchTotal.ercDebtRate = Asset.ercDebtRate;
+            matchTotal.dethYieldRate = s.vault[Asset.vault].dethYieldRate;
+        }
+        // Default enum is PartialFill
+        SR status;
+        if (incomingBid.ercAmount >= lowestSell.ercAmount) {
+            status = SR.FullyFilled;
+        }
+
+        LibShortRecord.fillShortRecord(
+            asset,
+            lowestSell.addr,
+            lowestSell.shortRecordId,
+            status,
+            shortFillEth,
+            fillErc,
+            matchTotal.ercDebtRate,
+            matchTotal.dethYieldRate
+        );
+    } else {
+        // Match ask
+        s.vaultUser[s.asset[asset].vault][lowestSell.addr].ethEscrowed += fillEth;
+        matchTotal.askFillErc += fillErc;
+    }
+
+    matchTotal.fillErc += fillErc;
+    matchTotal.fillEth += fillEth;
+    matchTotal.lastMatchPrice = lowestSell.price;
+}
+```
+--- 
+
+
+
