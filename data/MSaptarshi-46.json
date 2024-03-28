@@ -1,0 +1,8 @@
+{
+  "contest": 348,
+  "handle": "MSaptarshi",
+  "risk": "2",
+  "title": "Unsafe Casting of int256 to uint256",
+  "issueId": 46,
+  "issueUrl": "https://github.com/code-423n4/2024-03-dittoeth-findings/issues/46"
+}
