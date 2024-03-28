@@ -1,0 +1,8 @@
+{
+  "contest": 348,
+  "handle": "MSaptarshi",
+  "risk": "3",
+  "title": "TWAP interval is hardcoded as 30 minutes",
+  "issueId": 54,
+  "issueUrl": "https://github.com/code-423n4/2024-03-dittoeth-findings/issues/54"
+}
