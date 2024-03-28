@@ -1,0 +1,8 @@
+{
+  "contest": 348,
+  "handle": "samuraii77",
+  "risk": "2",
+  "title": "Incorrect if statement could cause an attacker to claim collateral that is not his own",
+  "issueId": 56,
+  "issueUrl": "https://github.com/code-423n4/2024-03-dittoeth-findings/issues/56"
+}
