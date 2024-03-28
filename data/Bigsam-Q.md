@@ -89,7 +89,7 @@ return _hintId;
 The repeated code segment from lines 564 to 569 is unnecessary duplication and affects the readability and maintainability of the contract. It can be cleaned up to streamline the code and improve its maintainability.
 
 **GitHub Code:**  
-[Direct link to the relevant code in GitHub](#)
+https://github.com/code-423n4/2024-03-dittoeth/blob/91faf46078bb6fe8ce9f55bcb717e5d2d302d22e/contracts/libraries/LibOrders.sol#L556-L624
 
 **Code Before Mitigation:**
 ```solidity
@@ -197,4 +197,61 @@ Implement the following mitigation code:
 ```solidity
 // Remove the redundant code segment from lines 564 to 569
 ```
+
+## [L-04]: Ether Representation in Arithmetic Operations in `LibOrder` Code, 
+_Inconsistent Use of Ether in Arithmetic Operations in `LibOrder`_
+
+---
+**Github link **
+1. https://github.com/code-423n4/2024-03-dittoeth/blob/91faf46078bb6fe8ce9f55bcb717e5d2d302d22e/contracts/libraries/LibOrders.sol#L761
+2. https://github.com/code-423n4/2024-03-dittoeth/blob/91faf46078bb6fe8ce9f55bcb717e5d2d302d22e/contracts/libraries/LibOrders.sol#L960
+3. https://github.com/code-423n4/2024-03-dittoeth/blob/91faf46078bb6fe8ce9f55bcb717e5d2d302d22e/contracts/libraries/LibOrders.sol#L968
+
+**Issue Identified:**  
+The use of `ether` directly in `mul` and `div` external operations does not conform to the standard way of representing ether in the provided `LibOrder` code.
+
+**Code Snippets:**
+
+1.  
+```solidity
+bool startingShortWithinOracleRange = shortPrice <= oraclePrice.mul(1.005 ether) && prevShortPrice >= oraclePrice;
+```
+
+2.  
+```solidity
+Vault.dethTitheMod = (C.MAX_TITHE - Vault.dethTithePercent).mulU16(discountPct.div(0.04 ether));
+```
+
+3.  
+```solidity
+bool isDiscounted = savedPrice > price.mul(1.01 ether);
+```
+
+**Analysis:**
+
+The direct use of `ether` in arithmetic calculations is not a standard practice in Solidity. The most consistent and error-free approach is to use the smallest denomination of ether, which is `wei`, in the calculations.
+
+**Mitigation:**
+
+To ensure consistent and accurate arithmetic calculations, the code should use the `wei` unit to represent the smallest denomination of ether. Below are the corrected versions of the provided code snippets:
+
+1.  
+```solidity
+bool startingShortWithinOracleRange = shortPrice <= oraclePrice.mul(1.005e18) && prevShortPrice >= oraclePrice;
+```
+
+2.  
+```solidity
+Vault.dethTitheMod = (C.MAX_TITHE - Vault.dethTithePercent).mulU16(discountPct.div(40e14));
+```
+
+3.  
+```solidity
+bool isDiscounted = savedPrice > price.mul(1.01e18);
+```
+
+By representing ether in `wei`, the code adheres to the standard arithmetic practices in Solidity and reduces the risk of computational errors.
+
+--- 
+
 
