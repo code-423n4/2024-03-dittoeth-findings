@@ -1,0 +1,8 @@
+{
+  "contest": 348,
+  "handle": "Stormreckson",
+  "risk": "3",
+  "title": "ShortId isn't validated if it belongs to the shorter, arbitrary shortId can be used for different shorter.",
+  "issueId": 65,
+  "issueUrl": "https://github.com/code-423n4/2024-03-dittoeth-findings/issues/65"
+}
