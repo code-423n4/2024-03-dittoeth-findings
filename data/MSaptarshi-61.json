@@ -1,0 +1,8 @@
+{
+  "contest": 348,
+  "handle": "MSaptarshi",
+  "risk": "2",
+  "title": "Protocol uses the same heartbeat for all feeds which is highly dangerous",
+  "issueId": 61,
+  "issueUrl": "https://github.com/code-423n4/2024-03-dittoeth-findings/issues/61"
+}
