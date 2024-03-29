@@ -1,0 +1,8 @@
+{
+  "contest": 348,
+  "handle": "ASCANsec",
+  "risk": "3",
+  "title": "STETH can be withdrawn if the LSTs(rETH/stETH) vault of the user is empty but it will never be the exact asset deposited",
+  "issueId": 70,
+  "issueUrl": "https://github.com/code-423n4/2024-03-dittoeth-findings/issues/70"
+}
