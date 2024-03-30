@@ -1,0 +1,8 @@
+{
+  "contest": 348,
+  "handle": "Bigsam",
+  "risk": "3",
+  "title": "Incorrect Collateral Value and Ratio Assessment in the Contract Due to Unbound Frozen Collateral  ( incorrect  getCollateralRatioNonPrice assessment and  solvency of the position)",
+  "issueId": 79,
+  "issueUrl": "https://github.com/code-423n4/2024-03-dittoeth-findings/issues/79"
+}
