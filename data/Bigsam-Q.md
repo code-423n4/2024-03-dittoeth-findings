@@ -482,7 +482,7 @@ function matchlowestSell(
 https://github.com/code-423n4/2024-03-dittoeth/blob/91faf46078bb6fe8ce9f55bcb717e5d2d302d22e/contracts/libraries/LibOrders.sol#L599-L602
 ## Impact
 
-The `sellAlgo` function in the provided code had a critical vulnerability that could lead to substantial financial losses. The core issue was in the matching mechanism between the highest bidder and market sellers. The implementation allows a bidder to retain their ERC20 amount demand and receive additional ETH,  but to prevent any unforeseen issues in the future highestbider’s demand should be 0 when filled .
+The `sellAlgo` function in the provided code had a critical vulnerability that could lead to substantial financial losses. The core issue was in the matching mechanism between the highest bidder and market sellers. The implementation allows a bidder to retain their ERC20 amount demand while they have received the ERC20 amount ,  but to prevent any unforeseen issues in the future highestbider’s demand should be 0 when filled .
 
 ## Proof of Concept
 
@@ -524,6 +524,69 @@ This revised code ensures that once a bidder is matched, their ERC20 demand and 
 
 --- 
 
-The revised report now correctly addresses the mitigation of the vulnerability and sets
+Your revised report is well-structured and effectively communicates the vulnerability and its mitigation. I've made a few minor adjustments for clarity and coherence. Here's the further refined report:
+
+---
+
+## [L-08] Enhanced Record Management: Addressing the Vulnerability in the BidAlgo Matching Algorithm
+---
+
+**Github code**
+[https://github.com/code-423n4/2024-03-dittoeth/blob/91faf46078bb6fe8ce9f55bcb717e5d2d302d22e/contracts/facets/BidOrdersFacet.sol#L169-L178](https://github.com/code-423n4/2024-03-dittoeth/blob/91faf46078bb6fe8ce9f55bcb717e5d2d302d22e/contracts/facets/BidOrdersFacet.sol#L169-L178)
+
+## Impact
+
+The `BidAlgo` function in the provided code exhibited a critical vulnerability that could lead to substantial financial losses. The core issue was in the matching mechanism between the lowest seller and market order of bidders. The flawed implementation allowed a seller to retain their ERC20 amount to sell and receive the corresponding ETH without correctly updating the bidder's records. This oversight could lead to potential exploitation and significant financial loss to the contract.
+
+## Proof of Concept
+
+The flawed code snippet:
+
+```solidity
+} else {
+    if (incomingBid.ercAmount == lowestSell.ercAmount) {
+        if (lowestSell.isShort()) {
+            b.matchedShortId = lowestSell.id;
+            b.prevShortId = lowestSell.prevId;
+            LibOrders.matchOrder(s.shorts, asset, lowestSell.id);
+        } else {
+            b.matchedAskId = lowestSell.id;
+            LibOrders.matchOrder(s.asks, asset, lowestSell.id);
+        }
+    } 
+```
+
+## Description
+
+The vulnerability arises when the condition `if (incomingBid.ercAmount == lowestSell.ercAmount)` is met during the matching process. For instance:
+
+- Larry wants to exchange 50 ETH for 1000 USDC.
+- Abass bids $1000 at the market price.
+
+At the point of matching, the contract sets Abass's USDC value to zero and increases Abass's ETH to 50 ETH. Even though Larry has received his ERC20 - 1000 USDC, he retains his ERC amount, which is not set to 0. His ID was reused, thus removing it from the order block, but the details were never updated as they should have been. Since the seller is bringing ERC into the market for exchange, there is significant risk here if users can gain access to their tokens that were never subtracted during the match.
+
+## Recommended Mitigation Steps
+
+To address this vulnerability, the contract should ensure that once a lowest sell is matched, their ERC20 being supplied and ETH values are correctly updated to prevent re-matching and potential exploitation. Here's a revised code snippet to mitigate this issue:
+
+```solidity
+} else {
+    if (incomingBid.ercAmount == lowestSell.ercAmount) {
+        if (lowestSell.isShort()) {
+            b.matchedShortId = lowestSell.id;
+            b.prevShortId = lowestSell.prevId;
+            LibOrders.matchOrder(s.shorts, asset, lowestSell.id);
+        } else {
+            b.matchedAskId = lowestSell.id;
+            LibOrders.matchOrder(s.asks, asset, lowestSell.id);
+        }
+        // Ensure lowestSell's ercAmount is set to zero to prevent further matching
+        lowestSell.ercAmount = 0;
+    } 
+```
+
+--- 
+
+
 
 
