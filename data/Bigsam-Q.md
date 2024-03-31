@@ -536,7 +536,7 @@ Your revised report is well-structured and effectively communicates the vulnerab
 
 ## Impact
 
-The `BidAlgo` function in the provided code exhibited a critical vulnerability that could lead to substantial financial losses. The core issue was in the matching mechanism between the lowest seller and market order of bidders. The flawed implementation allowed a seller to retain their ERC20 amount to sell and receive the corresponding ETH without correctly updating the bidder's records. This oversight could lead to potential exploitation and significant financial loss to the contract.
+The `BidAlgo` function in the provided code exhibited a critical vulnerability that could lead to substantial financial losses. The core issue was in the matching mechanism between the lowest seller and market order of bidders. The flawed implementation allowed a seller to retain their ERC20 amount supplied to sell and receive the corresponding ETH without correctly updating the seller's records. This oversight could lead to potential exploitation and significant financial loss to the contract if there is a breakdown in the contract, while there was no identified exploits while the contract runs fine all records should be updated well before discarding.
 
 ## Proof of Concept
 
@@ -563,8 +563,8 @@ The vulnerability arises when the condition `if (incomingBid.ercAmount == lowest
 - Larry wants to exchange 50 ETH for 1000 USDC.
 - Abass bids $1000 at the market price.
 
-At the point of matching, the contract sets Abass's USDC value to zero and increases Abass's ETH to 50 ETH. Even though Larry has received his ERC20 - 1000 USDC, he retains his ERC amount, which is not set to 0. His ID was reused, thus removing it from the order block, but the details were never updated as they should have been. Since the seller is bringing ERC into the market for exchange, there is significant risk here if users can gain access to their tokens that were never subtracted during the match.
-
+At the point of matching, the contract sets Abass's USDC value to zero and increases Abass's ETH to 50 ETH. Even though Larry has received his ERC20 - 1000 USDC, he retains his ERC amount, which is not set to 0. His ID was reused, thus removing it from the order block, but the details were never updated as they should have been. Since the seller is bringing ERC into the market for exchange, there is significant risk here if users can gain access to their tokens that were never subtracted during the match when demand and supply was balance.
+updating bider's side and neglecting sell side will leave a gap in demand and supply in the record.
 ## Recommended Mitigation Steps
 
 To address this vulnerability, the contract should ensure that once a lowest sell is matched, their ERC20 being supplied and ETH values are correctly updated to prevent re-matching and potential exploitation. Here's a revised code snippet to mitigate this issue:
