@@ -326,7 +326,7 @@ It is recommended to update the code to maintain consistency between the `bridge
 
 https://github.com/code-423n4/2024-03-dittoeth/blob/91faf46078bb6fe8ce9f55bcb717e5d2d302d22e/contracts/facets/BidOrdersFacet.sol#L215-L262
 ## Impact
-Failure to update the `colUsed` in the `matchTotal` struct can lead to incorrect calculations and potential loss of funds or undesired behavior in the contract's operations that rely on this parameter.
+Failure to update the `colUsed` in the `matchTotal` struct can lead to incorrect calculations and potential loss of funds or undesired behavior in the contract's operations that will rely on this parameter in the future.
 
 
 ### Code Vulnerability
