@@ -326,7 +326,7 @@ It is recommended to update the code to maintain consistency between the `bridge
 
 https://github.com/code-423n4/2024-03-dittoeth/blob/91faf46078bb6fe8ce9f55bcb717e5d2d302d22e/contracts/facets/BidOrdersFacet.sol#L215-L262
 ## Impact
-Failure to update the `colUsed` in the `matchTotal` struct can lead to incorrect calculations and potential loss of funds or undesired behavior in the contract's operations that will rely on this parameter in the future.
+Failure to update the `colUsed` in the `matchTotal` struct can lead to incorrect calculations and potential loss of funds or undesired behavior in the contract's operations that will rely on this parameter later in the future/including the record keeping/wrong information displayed as matchtotal.col will always be 0.
 
 
 ### Code Vulnerability
@@ -472,7 +472,58 @@ function matchlowestSell(
     matchTotal.lastMatchPrice = lowestSell.price;
 }
 ```
+
+
 --- 
 
+## [L-07] Enhanced Record Management: Addressing the Vulnerability in the sellAlgo Matching Algorithm
+---
+**Github code**
+https://github.com/code-423n4/2024-03-dittoeth/blob/91faf46078bb6fe8ce9f55bcb717e5d2d302d22e/contracts/libraries/LibOrders.sol#L599-L602
+## Impact
+
+The `sellAlgo` function in the provided code had a critical vulnerability that could lead to substantial financial losses. The core issue was in the matching mechanism between the highest bidder and market sellers. The implementation allows a bidder to retain their ERC20 amount demand and receive additional ETH,  but to prevent any unforeseen issues in the future highestbider’s demand should be 0 when filled .
+
+## Proof of Concept
+
+The flawed code snippet:
+
+```solidity
+} else {
+    if (incomingAsk.ercAmount == highestBid.ercAmount) {
+        matchOrder(s.bids, asset, highestBid.id);
+        updateBidOrdersOnMatch(s.bids, asset, highestBid.id, true);
+      
+    } 
+```
+
+## Description
+
+The condition `if (incomingAsk.ercAmount == highestBid.ercAmount)` was met during the matching process. For instance, when Larry is the seller and Abass is the highest bidder:
+
+- Abass bids $1000 for 50 ETH, wanting to exchange his ERC20 (e.g., USDC) at the market price.
+- Larry wants to exchange 50 ETH for USDC at the same market price.
+
+At the point of matching, the contract sets Larry's ETH value to zero and increases Abass's ETH to $1000. Even though Abass has received his ERC20, he remains the highest bidder since the price is constant and the ercamount demanded is the same. But his id was reused thus removing it from the order block, it was removed but all this detials were never updated as the should be.
+
+## Recommended Mitigation Steps
+
+To address this, the contract should ensure that once a bidder is matched, their ERC20 demand and ETH values are correctly updated to prevent re-matching and exploitation which an incorrect updgrade or attack can reopen. Here's a revised code snippet to mitigate this issue:
+
+```solidity
+} else {
+    if (incomingAsk.ercAmount == highestBid.ercAmount) {
+        matchOrder(s.bids, asset, highestBid.id);
+        updateBidOrdersOnMatch(s.bids, asset, highestBid.id, true);
+        // Ensure highestBid is not considered in further matching
+        highestBid.ercAmount = 0;
+    } 
+```
+
+This revised code ensures that once a bidder is matched, their ERC20 demand and ETH values are appropriately updated, preventing potential re-matching and financial loss for the contract.
+
+--- 
+
+The revised report now correctly addresses the mitigation of the vulnerability and sets
 
 
