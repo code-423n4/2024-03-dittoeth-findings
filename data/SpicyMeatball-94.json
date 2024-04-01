@@ -1,0 +1,8 @@
+{
+  "contest": 348,
+  "handle": "SpicyMeatball",
+  "risk": "2",
+  "title": "Withdrawal from VAULT ONE  may revert if one of the bridges has no LST in it",
+  "issueId": 94,
+  "issueUrl": "https://github.com/code-423n4/2024-03-dittoeth-findings/issues/94"
+}
