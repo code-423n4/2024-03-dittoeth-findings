@@ -1,0 +1,8 @@
+{
+  "contest": 348,
+  "handle": "Topmark",
+  "risk": "2",
+  "title": "Invalid Verification due to Possible Wrong Bid ID Direction when dealing with same Bid Price",
+  "issueId": 95,
+  "issueUrl": "https://github.com/code-423n4/2024-03-dittoeth-findings/issues/95"
+}
