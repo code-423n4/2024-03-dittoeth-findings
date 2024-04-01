@@ -1,0 +1,8 @@
+{
+  "contest": 348,
+  "handle": "Topmark",
+  "risk": "2",
+  "title": "Hint is not completely force to be Within 0.5% of OraclePrice as expected by Protocol",
+  "issueId": 100,
+  "issueUrl": "https://github.com/code-423n4/2024-03-dittoeth-findings/issues/100"
+}
