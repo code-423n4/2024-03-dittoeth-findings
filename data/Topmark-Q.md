@@ -8,3 +8,34 @@ https://github.com/code-423n4/2024-03-dittoeth/blob/main/contracts/libraries/Lib
     }
 ```
 ###  Report 2:
+#### Missing Implementation to handle hintIds with same Creation Time
+The function below from the LibOrders contract shows how hint id is returned by using creation time as noted in the pointer but the protocol miss the fact that two or more hint ids can have the same creation time and no implementation was done in this regards
+https://github.com/code-423n4/2024-03-dittoeth/blob/main/contracts/libraries/LibOrders.sol#L838
+```solidity
+   function findOrderHintId(
+        mapping(address => mapping(uint16 => STypes.Order)) storage orders,
+        address asset,
+        MTypes.OrderHint[] memory orderHintArray
+    ) internal view returns (uint16 hintId) {
+        bool anyOrderHintPrevMatched;
+        for (uint256 i; i < orderHintArray.length; i++) {
+            MTypes.OrderHint memory orderHint = orderHintArray[i];
+            STypes.Order storage order = orders[asset][orderHint.hintId];
+            O hintOrderType = order.orderType;
+            if (hintOrderType == O.Cancelled || hintOrderType == O.Matched) {
+                continue;
+>>>            } else if (order.creationTime == orderHint.creationTime) {
+                return orderHint.hintId;
+            } else if (!anyOrderHintPrevMatched && order.prevOrderType == O.Matched) {
+                anyOrderHintPrevMatched = true;
+            }
+        }
+
+        if (anyOrderHintPrevMatched) {
+            // @dev If hint was prev matched, assume that hint was close to HEAD and therefore is reasonable to use HEAD
+            return C.HEAD;
+        }
+
+        revert Errors.BadHintIdArray();
+    }
+```
