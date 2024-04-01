@@ -39,3 +39,77 @@ https://github.com/code-423n4/2024-03-dittoeth/blob/main/contracts/libraries/Lib
         revert Errors.BadHintIdArray();
     }
 ```
+###  Report 3:
+#### Dos from Underflow Error
+The function below shows how short is canceled in the LibOrders contract, the problem is that protocol did not handle situation where collateralDiff is greater than eth as noted from the pointer and adjusted provided, this is due to precision loss that would have adjusted the value of eth in relation to the collateralDiff  to be deducted which would cause the code to revert causing Denial of service. A checked should be added before deduction as adjusted in code snippet below
+https://github.com/code-423n4/2024-03-dittoeth/blob/main/contracts/libraries/LibOrders.sol#L929
+```solidity
+    function cancelShort(address asset, uint16 id) internal {
+        AppStorage storage s = appStorage();
+        STypes.Order storage shortOrder = s.shorts[asset][id];
+
+        O orderType = shortOrder.orderType;
+        if (orderType == O.Cancelled || orderType == O.Matched) revert Errors.NotActiveOrder();
+
+        uint88 eth = shortOrder.ercAmount.mulU88(shortOrder.price).mulU88(LibOrders.convertCR(shortOrder.shortOrderCR));
+
+        STypes.Asset storage Asset = s.asset[asset];
+        uint256 vault = Asset.vault;
+
+        uint8 shortRecordId = shortOrder.shortRecordId;
+        address shorter = shortOrder.addr;
+        STypes.ShortRecord storage shortRecord = s.shortRecords[asset][shorter][shortRecordId];
+
+        if (shortRecord.status == SR.Closed) {
+            ...
+        } else {
+            uint88 minShortErc = uint88(LibAsset.minShortErc(asset));
+            if (shortRecord.ercDebt < minShortErc) {
+                // @dev prevents leaving behind a partially filled SR is under minShortErc
+                // @dev if the corresponding short is cancelled, then the partially filled SR's debt will == minShortErc
+                uint88 debtDiff = minShortErc - shortRecord.ercDebt;
+                {
+                    STypes.Vault storage Vault = s.vault[vault];
+
+                    uint88 collateralDiff = shortOrder.price.mulU88(debtDiff).mulU88(LibOrders.convertCR(shortOrder.shortOrderCR));
+
+                    LibShortRecord.fillShortRecord(
+                        asset,
+                        shorter,
+                        shortRecordId,
+                        SR.FullyFilled,
+                        collateralDiff,
+                        debtDiff,
+                        Asset.ercDebtRate,
+                        Vault.dethYieldRate
+                    );
+
+                    Vault.dethCollateral += collateralDiff;
+                    Asset.dethCollateral += collateralDiff;
+                    Asset.ercDebt += debtDiff;
+
+                    // @dev update the eth refund amount
++++             if (eth >= collateralDiff ){
+ >>>                   eth -= collateralDiff;
++++               }
++++             else{
++++               eth  = 0;
++++             }
+                }
+                // @dev virtually mint the increased debt
+                s.assetUser[asset][shorter].ercEscrowed += debtDiff;
+            } else {
+                shortRecord.status = SR.FullyFilled;
+            }
+        }
+
+        s.vaultUser[vault][shorter].ethEscrowed += eth;
+
+        // Approximating the startingShortId, rather than expecting exact match
+        if (id == Asset.startingShortId) {
+           ...
+        }
+
+        cancelOrder(s.shorts, asset, id);
+    }
+```
