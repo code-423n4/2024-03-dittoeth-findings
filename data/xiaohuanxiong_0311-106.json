@@ -1,0 +1,8 @@
+{
+  "contest": 348,
+  "handle": "xiaohuanxiong_0311",
+  "risk": "2",
+  "title": "Potential Slippage Control Vulnerability in depositEth Function Allowing for Sandwich Attacks",
+  "issueId": 106,
+  "issueUrl": "https://github.com/code-423n4/2024-03-dittoeth-findings/issues/106"
+}
