@@ -1,0 +1,8 @@
+{
+  "contest": 348,
+  "handle": "Infect3d",
+  "risk": "3",
+  "title": "If a redemption has N disputable shorts, it is possible to dispute N-1 times the redemption to maximize the penalty",
+  "issueId": 110,
+  "issueUrl": "https://github.com/code-423n4/2024-03-dittoeth-findings/issues/110"
+}
