@@ -1,0 +1,8 @@
+{
+  "contest": 348,
+  "handle": "Bigsam",
+  "risk": "2",
+  "title": "Improper handling of precise values GOTTEN will introduce precision issues in libbridgerouter.sol",
+  "issueId": 144,
+  "issueUrl": "https://github.com/code-423n4/2024-03-dittoeth-findings/issues/144"
+}
