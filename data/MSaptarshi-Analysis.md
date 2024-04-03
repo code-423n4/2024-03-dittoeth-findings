@@ -27,15 +27,13 @@ Testing locally && Reporting
 
 The Ditto protocol is a new decentralized stable asset protocol for Ethereum mainnet. It takes in overcollateralized liquid staked ETH (rETH, stETH) to create stablecoins using a gas optimized orderbook (starting with a USD stablecoin, dUSD).
 On the orderbook, bidders and shorters bring ETH, askers can sell their dUSD. Bidders get the dUSD, shorters get the bidders collateral and a ShortRecord to manage their debt position (similar to a CDP). Shorters get the collateral of the position (and thus the LST yield), with the bidder getting the stable asset, rather than a CDP where the user also gets the asset.
-
-
-
-
-
-
-
+In the protocol,
+user deposit ETH /LST --> mint dETH
+user(shorter) borrows dUSD by putting part of  dETH  as collateral[shortOrderCR](other part is provided by bidder or vice versa), they sell this short position to a bidder
+user(bider) bids for dUSD in exchange for dETH
 
 ### Contracts
+
 `facets/BidOrdersFacet.sol` 
 > Orders can only be bid through this contract and orders can be bid  by two ways ,one is by calling `createBid` which is done for creating the incomming bid, with hints, and the other is by calling `createForcedBid` which can only be called by the proxy, which doesn't need any hints.
 	
@@ -100,12 +98,17 @@ The protocol has only one has only governance role, which belongs to the DAO. No
 Overall the design and health of the codebase are satisfactory. The use of mostly small , encapsulated function and isolated contracts are very helpful.`DittoETH` team have used innovative designs, especially with the AMM (use of fallback oracle) and liquidation(properly dividing the reward) that encourage decentralization, user incentive  and user control, as well as recognizing the risks associated with the system.
 The main concern of the system will be
  > some function-level documentation 
+
  > variable names
 
 ## Recommendation
 > **More function-level documentation**
+
 > **Use of safecasting from OZ**
+
 > **Change some of the variable names**
+
+
 
 ### Time spent:
 100 hours
