@@ -586,7 +586,54 @@ To address this vulnerability, the contract should ensure that once a lowest sel
 ```
 
 --- 
+## [L-08] Inconsistent Time Duration Comparison in Solidity Smart Contract Leads to Potential Denial of Entitlements
 
+--- 
+**Github code**
+https://github.com/code-423n4/2024-03-dittoeth/blob/91faf46078bb6fe8ce9f55bcb717e5d2d302d22e/contracts/libraries/LibOrders.sol#L45
 
+### Impact
+
+The impact of the current code is that a user might be denied the ditto shares they are entitled to if the `timeTillMatch` exactly matches the `MIN_DURATION`. This is because the comparison `timeTillMatch > C.MIN_DURATION` will evaluate to `false` when `timeTillMatch` is equal to `C.MIN_DURATION`.
+
+The likelihood of this impact occurring is low since `timeTillMatch` would need to exactly match the duration in seconds. Nonetheless, it is still a bug that can deny users their entitlements.
+
+### Proof of Concept
+
+Given the code snippet:
+
+```solidity
+if (timeTillMatch > C.MIN_DURATION) 
+```
+
+And assuming `C.MIN_DURATION` is defined as:
+
+```solidity
+uint256 constant MIN_DURATION = 14 days;
+```
+
+Here, `timeTillMatch` is in seconds and `C.MIN_DURATION` is in days.
+
+Solidity will implicitly convert the constant `14 days` to its equivalent in seconds (which is `1209600 seconds` for 14 days). So, the comparison will be:
+
+```solidity
+if (timeTillMatch > 1209600)
+```
+
+In this comparison, `timeTillMatch` is already in seconds, so there's no need to convert it to days. Thus, the only impact is when `timeTillMatch == 1209600`.
+
+### Tools
+
+Manual code analysis and testing are required to identify this issue.
+
+### Mitigation
+
+To fix this issue and capture the exact duration correctly, you can modify the comparison to use `>=` instead of `>`:
+
+```solidity
+if (timeTillMatch >= 1209600)
+```
+
+By using `>=`, the condition will be true when `timeTillMatch` is equal to or greater than `1209600`, ensuring that users are not denied their entitlements when `timeTillMatch` exactly matches the `MIN_DURATION`.
 
 
