@@ -1,0 +1,8 @@
+{
+  "contest": 348,
+  "handle": "0xbepresent",
+  "risk": "2",
+  "title": "`VaultUser.bridgeCredit` does not decrease when `ETH` is lost due to `Liquidation` or `Redemption`, causing incorrect tally in `BridgeRouter`",
+  "issueId": 166,
+  "issueUrl": "https://github.com/code-423n4/2024-03-dittoeth-findings/issues/166"
+}
