@@ -1,0 +1,8 @@
+{
+  "contest": 348,
+  "handle": "0xbepresent",
+  "risk": "3",
+  "title": "Fluctuating collateral value during redemption proposal dispute period exposes the redeemer or protocol to potential gains or losses depending on the asset price movement",
+  "issueId": 171,
+  "issueUrl": "https://github.com/code-423n4/2024-03-dittoeth-findings/issues/171"
+}
