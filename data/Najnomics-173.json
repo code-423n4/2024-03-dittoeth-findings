@@ -1,0 +1,8 @@
+{
+  "contest": 348,
+  "handle": "Najnomics",
+  "risk": "2",
+  "title": "Possible DOS on deposit(), withdraw() and unstake() for BridgeReth, leading to user loss of funds",
+  "issueId": 173,
+  "issueUrl": "https://github.com/code-423n4/2024-03-dittoeth-findings/issues/173"
+}
