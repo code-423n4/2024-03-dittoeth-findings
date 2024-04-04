@@ -1,0 +1,8 @@
+{
+  "contest": 348,
+  "handle": "0xbepresent",
+  "risk": "2",
+  "title": "The `short` debt is not updated when disputing in `RedemptionFacet::disputeRedemption`",
+  "issueId": 163,
+  "issueUrl": "https://github.com/code-423n4/2024-03-dittoeth-findings/issues/163"
+}
