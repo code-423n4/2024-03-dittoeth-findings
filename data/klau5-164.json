@@ -1,0 +1,8 @@
+{
+  "contest": 348,
+  "handle": "klau5",
+  "risk": "2",
+  "title": "oracleCircuitBreaker: Not checking if price information of asset is stale",
+  "issueId": 164,
+  "issueUrl": "https://github.com/code-423n4/2024-03-dittoeth-findings/issues/164"
+}
