@@ -1,0 +1,8 @@
+{
+  "contest": 348,
+  "handle": "klau5",
+  "risk": "2",
+  "title": "Frontrunning withdrawal transactions and depositing token on the bridge can DoS a user's withdrawal",
+  "issueId": 161,
+  "issueUrl": "https://github.com/code-423n4/2024-03-dittoeth-findings/issues/161"
+}
