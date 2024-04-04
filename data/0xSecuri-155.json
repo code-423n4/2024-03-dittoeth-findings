@@ -1,0 +1,8 @@
+{
+  "contest": 348,
+  "handle": "0xSecuri",
+  "risk": "2",
+  "title": "Missing Validation for Stale Chainlink Data",
+  "issueId": 155,
+  "issueUrl": "https://github.com/code-423n4/2024-03-dittoeth-findings/issues/155"
+}
