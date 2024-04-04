@@ -1,0 +1,8 @@
+{
+  "contest": 348,
+  "handle": "devAnas",
+  "risk": "2",
+  "title": "Not updating the Shorter collateral ratio while exitShort, result into less share rewards for shorter.",
+  "issueId": 160,
+  "issueUrl": "https://github.com/code-423n4/2024-03-dittoeth-findings/issues/160"
+}
