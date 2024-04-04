@@ -1,0 +1,8 @@
+{
+  "contest": 348,
+  "handle": "0xbepresent",
+  "risk": "2",
+  "title": "Users receiving extra `ETH`, whether as `Liquidator` or `Redeemer`, will incur fees when withdrawing",
+  "issueId": 169,
+  "issueUrl": "https://github.com/code-423n4/2024-03-dittoeth-findings/issues/169"
+}
