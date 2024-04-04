@@ -1,0 +1,8 @@
+{
+  "contest": 348,
+  "handle": "fractal_20892",
+  "risk": "2",
+  "title": "Missing input validation for shortHintArray could lead to Incorrect or Inefficient Order Matching",
+  "issueId": 151,
+  "issueUrl": "https://github.com/code-423n4/2024-03-dittoeth-findings/issues/151"
+}
