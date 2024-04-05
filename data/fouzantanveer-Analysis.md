@@ -71,9 +71,7 @@ Diving into the technical intricacies of DittoETH's architecture reveals a harmo
 
 - **LibOrders.sol**: The backbone of the platform's trading logic, this library handles order lifecycle management, including creation, execution, and cancellation. Its `sellMatchAlgo` and `buyMatchAlgo` functions are central to matching bids and asks, showcasing a deep integration of market dynamics within the platform's core.
 
-### Governance and Upgradability
 
-While the governance structure might not be explicitly detailed in the provided code snippets, the use of the Diamond Standard suggests a forward-looking approach to protocol management and evolution. This design choice allows for future expansions and modifications, adapting to the evolving DeFi landscape and community governance inputs.
 
 ### Integrations and Dependencies
 
@@ -275,6 +273,8 @@ By integrating the Shorting mechanism into its framework, DittoETH empowers user
 ## Potential Risks
 
 The protocol's heavy reliance on oracles for price determination, notably evident in the `LibOracle.sol` and `UniswapOracleLibrary.sol` contracts, introduces significant technical risks that could be exploited by malicious actors. One potential risk is the susceptibility to Oracle Manipulation Attacks, whereby attackers could attempt to manipulate the price data provided by the Chainlink oracle, as well as Uniswap oracle, to deceive the protocol into executing trades or triggering liquidations at unfavorable rates. For instance, vulnerabilities within the functions responsible for interacting with the oracles, particularly in `LibOracle.sol`, could be exploited to feed inaccurate price data to the protocol, leading to erroneous trade executions or liquidations. Additionally, any flaws in the TWAP calculation process within `UniswapOracleLibrary.sol` could be leveraged by attackers to manipulate prices and deceive the protocol. Moreover, the dependency on oracle updates introduces the risk of Front-Running Opportunities, where attackers could exploit delays in oracle updates to anticipate price movements and gain an unfair advantage in executing trades. This risk is particularly relevant in contracts such as `LibOracle.sol` and `UniswapOracleLibrary.sol`, where price data is fetched and utilized for critical protocol operations. Furthermore, any delays or inconsistencies in the oracle updates, as handled within these contracts, could be exploited by attackers to manipulate prices or execute trades at favorable rates before the oracle updates reflect the true market conditions. Therefore, ensuring the robustness and security of the oracle systems, as well as implementing stringent validation mechanisms within the codebase, is imperative to mitigate these technical risks effectively.
+
+
 
 
 ### Time spent:
