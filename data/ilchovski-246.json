@@ -1,0 +1,8 @@
+{
+  "contest": 348,
+  "handle": "ilchovski",
+  "risk": "2",
+  "title": "Uniswap v3 observe call can revert and block the entire protocol for a period of time",
+  "issueId": 246,
+  "issueUrl": "https://github.com/code-423n4/2024-03-dittoeth-findings/issues/246"
+}
