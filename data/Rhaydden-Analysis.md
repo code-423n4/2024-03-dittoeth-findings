@@ -155,6 +155,12 @@ This section lists functions that are explicitly declared public or payable. Ple
 ||Totals	|12	|1	|3254	|3043	|1911	|756	|1029|
 
 
+`Lines:` total lines of the source unit
+`nLines:` normalized lines of the source unit (e.g. normalizes functions spanning multiple lines)
+`nSLOC:` normalized source lines of code (only source-code lines; no comments, no blank lines)
+`Comment Lines:` lines containing single or block comments
+`Complexity Score:` a custom complexity score derived from code statements that are known to introduce code complexity (branches, loops, calls, external interfaces, ...)
+
 
 ##  4. Architecture Assessment
 
@@ -754,8 +760,8 @@ In general, The DittoETH’s protocol presents a well-designed architecture. The
 
 
 ## 10. Time Spent
-36 hours
+55 hours
 
 
 ### Time spent:
-36 hours
+55 hours
