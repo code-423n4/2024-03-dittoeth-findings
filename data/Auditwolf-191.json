@@ -1,0 +1,8 @@
+{
+  "contest": 348,
+  "handle": "Auditwolf",
+  "risk": "3",
+  "title": "Failure to update Oracle due to rounding issue leading incorrectness of the orderbook",
+  "issueId": 191,
+  "issueUrl": "https://github.com/code-423n4/2024-03-dittoeth-findings/issues/191"
+}
