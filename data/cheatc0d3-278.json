@@ -1,0 +1,8 @@
+{
+  "contest": 348,
+  "handle": "cheatc0d3",
+  "risk": "2",
+  "title": "Inaccurate tappFee and callerFee calculations",
+  "issueId": 278,
+  "issueUrl": "https://github.com/code-423n4/2024-03-dittoeth-findings/issues/278"
+}
