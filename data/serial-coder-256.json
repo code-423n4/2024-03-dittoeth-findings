@@ -1,0 +1,8 @@
+{
+  "contest": 348,
+  "handle": "serial-coder",
+  "risk": "2",
+  "title": "The `LibOracle::getOraclePrice()` can return miscalculated prices due to flash crash events",
+  "issueId": 256,
+  "issueUrl": "https://github.com/code-423n4/2024-03-dittoeth-findings/issues/256"
+}
