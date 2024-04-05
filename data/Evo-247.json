@@ -1,0 +1,8 @@
+{
+  "contest": 348,
+  "handle": "Evo",
+  "risk": "2",
+  "title": "Liquidation could be blocked if there is not enough ethEscrowed in TAPP",
+  "issueId": 247,
+  "issueUrl": "https://github.com/code-423n4/2024-03-dittoeth-findings/issues/247"
+}
