@@ -1,0 +1,8 @@
+{
+  "contest": 348,
+  "handle": "falconhoof",
+  "risk": "3",
+  "title": "Decimals not scaled correctly in `getOraclePrice()` cause huge price discrepancies",
+  "issueId": 260,
+  "issueUrl": "https://github.com/code-423n4/2024-03-dittoeth-findings/issues/260"
+}
