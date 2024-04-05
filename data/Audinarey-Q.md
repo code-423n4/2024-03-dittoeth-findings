@@ -1,3 +1,4 @@
+## [L01]
 ## IMPACT
 
 Creation of SRs during order matching result in SR id collision for different users, this breaks protocol design intension (See coded POC)
@@ -62,4 +63,10 @@ Foundry
 
 ## RECOMMENDATION
 
-I am not sure if this is intended design, otherwise consider implementing the SR creation logic to create unique id for each unique user.
+I am not sure if this is intended design, otherwise consider implementing the SR creation logic to create unique id for each unique user. 
+
+
+## [L02]
+change the NATSPEC comment in [the `LibOrders.sol::updateBidOrdersOnMatch(...)`](https://github.com/code-423n4/2024-03-dittoeth/blob/91faf46078bb6fe8ce9f55bcb717e5d2d302d22e/contracts/libraries/LibOrders.sol#L469) 
+from: @param orders The market that will be impacted
+to: @param orders The orders mapping
