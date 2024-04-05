@@ -1,0 +1,8 @@
+{
+  "contest": 348,
+  "handle": "serial-coder",
+  "risk": "3",
+  "title": "A design flaw in `RedemptionFacet::disputeRedemption()` disincentivizes good disputers from doing their job, leading to the depeg of the `dUSD` stable asset",
+  "issueId": 250,
+  "issueUrl": "https://github.com/code-423n4/2024-03-dittoeth-findings/issues/250"
+}
