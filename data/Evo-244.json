@@ -1,0 +1,8 @@
+{
+  "contest": 348,
+  "handle": "Evo",
+  "risk": "2",
+  "title": "Deposit could be blocked when updateYield gets called in maybeUpdateYield",
+  "issueId": 244,
+  "issueUrl": "https://github.com/code-423n4/2024-03-dittoeth-findings/issues/244"
+}
