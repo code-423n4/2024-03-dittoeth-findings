@@ -166,7 +166,7 @@ This section lists functions that are explicitly declared public or payable. Ple
 
 
 <details>
-  <summary>Details of each contract and details of each function</summary> 
+  <summary>Details of each contract and FlowCharts of how the functions interact in each contract</summary> 
 
 
 ## BidOrdersFacet.sol
@@ -211,6 +211,11 @@ Functions like `createBid` and `createForcedBid` have specific access controls. 
 - `LibOrders, LibOracle, LibAsset, LibShortRecord:` Libraries used for various operations related to orders, oracle prices, assets, and short records.
 - `C:` A constants contract that holds various constants used throughout the contract.
 
+##### Flowchart
+![BidOrdersFacet](https://github.com/code-423n4/2024-03-dittoeth/assets/154236469/5e23b024-371c-43f8-9369-ca7f0f085d4b)
+
+To view full picture, click [here](https://github.com/code-423n4/2024-03-dittoeth/assets/154236469/5e23b024-371c-43f8-9369-ca7f0f085d4b)
+
 
 
 
@@ -246,6 +251,10 @@ The contract does not explicitly define roles or access control. However, the us
 - `LibOracle:` Provides functions for fetching and updating oracle prices, which are crucial for determining the current market price of assets.
 - `LibShortRecord:` Manages short records, which track the details of short orders.
 - `LibSRUtil:` Contains utility functions for the contract, related to system recovery mode checks.
+
+##### Flowchart
+![ShortOrdersFacet](https://github.com/code-423n4/2024-03-dittoeth/assets/154236469/7714f1cb-e012-4a10-aa39-8a86f8619697)
+To view full picture, click [here](https://github.com/code-423n4/2024-03-dittoeth/assets/154236469/7714f1cb-e012-4a10-aa39-8a86f8619697)
 
 
 
@@ -298,6 +307,10 @@ The contract uses modifiers like `isNotFrozen`, `nonReentrant`, and `onlyValidSh
 - `IDiamond:` An interface for interacting with the Diamond contract, which is a contract that can have multiple facets attached to it.
 
 
+##### Flowchart
+![PrimaryLiquidationFacet](https://github.com/code-423n4/2024-03-dittoeth/assets/154236469/e7b2bd8e-b980-4e7b-a618-0d0fdea7152c)
+To view full picture, click [here](https://github.com/code-423n4/2024-03-dittoeth/assets/154236469/e7b2bd8e-b980-4e7b-a618-0d0fdea7152c)
+
 ## BridgeRouterFacet.sol
 The `BridgeRouterFacet` contract is designed to facilitate the bridging of assets between different blockchain networks. It is part of a larger system that involves multiple facets and libraries to handle various aspects of asset management, bridging, and yield optimization. 
 
@@ -340,6 +353,10 @@ The contract uses modifiers for function access control. For example, `nonReentr
 - `IBridge:` An interface for interacting with bridge contracts.
 
 
+##### Flowchart
+![BridgeRouterFacet](https://github.com/code-423n4/2024-03-dittoeth/assets/154236469/94fedbbd-20db-4e66-b463-d5acc435a4af)
+To view full picture, click [here](https://github.com/code-423n4/2024-03-dittoeth/assets/154236469/94fedbbd-20db-4e66-b463-d5acc435a4af)
+
 
 ## ExitShortFacet.sol
 The `ExitShortFacet` contract is designed for managing the exit of short. It involves short selling of assets, where users can short sell assets by providing collateral and borrowing the asset to sell. The contract is designed to handle the exit of these short positions, allowing users to either exit completely or partially, and ensuring that the system's integrity and security are maintained throughout the process.
@@ -375,6 +392,11 @@ Solidity
 
 ##### Interfaces:
 - `IDiamond:` An interface for interacting with the Diamond contract, which is a contract that implements the Diamond pattern for upgradable smart contracts
+
+
+##### Flowchart
+![ExitShortFacet](https://github.com/code-423n4/2024-03-dittoeth/assets/154236469/ba628adb-a7eb-425a-ba32-b318572fae5a)
+To view full picture, click [here](https://github.com/code-423n4/2024-03-dittoeth/assets/154236469/ba628adb-a7eb-425a-ba32-b318572fae5a)
 
 
 ## RedemptionFacet.sol
@@ -421,6 +443,10 @@ Solidity
 - `Modifiers:` Inherits from a contract that defines modifiers like `isNotFrozen` and `nonReentrant`.
 - `LibSRUtil`, `LibShortRecord`, `LibOracle`, `LibOrders`, `LibBytes`, `Constants`, `SSTORE2`, and console are all external libraries or contracts that the RedemptionFacet contract interacts with to perform its operations.
 
+##### Flowchart
+![RedemptionFacet](https://github.com/code-423n4/2024-03-dittoeth/assets/154236469/4e947741-aee6-4377-b0b1-b409572e9098)
+To view full picture, click [here](https://github.com/code-423n4/2024-03-dittoeth/assets/154236469/4e947741-aee6-4377-b0b1-b409572e9098)
+
 
 ## LibBridgeRouter.sol
 The `LibBridgeRouter` is designed to facilitate operations related to bridging specifically within a vault system. It involves bridging assets between different blockchains or within the same blockchain but across different vaults. 
@@ -455,6 +481,10 @@ The `LibBridgeRouter` is designed to facilitate operations related to bridging s
 - `IBridge:` An interface for interacting with bridge contracts used to fetch the current dETH value for bridging assets.
 
 
+##### Flowchart
+![LibBridgeRouter](https://github.com/code-423n4/2024-03-dittoeth/assets/154236469/884580f2-93fc-4cf5-82e3-ac37c84006f1)
+To view full picture, click [here](https://github.com/code-423n4/2024-03-dittoeth/assets/154236469/884580f2-93fc-4cf5-82e3-ac37c84006f1)
+
 ## LibBytes.sol
 `LibBytes.sol` is designed to facilitate operations related to byte manipulation, specifically tailored for the context of reading proposal data from a storage system. It's designed to work with a specific data structure, MTypes.ProposalData, which is not defined within this library but is imported from another contract, DataTypes.sol.
 
@@ -470,6 +500,10 @@ The contract is a library, which means it's a collection of functions that can b
 ##### Libraries Used:
 - `MTypes:` Imported from contracts/libraries/DataTypes.sol. This library contains the definition of the MTypes.ProposalData struct used in the readProposalData function.
 - `SSTORE2:` Imported from solmate/utils/SSTORE2.sol. This library provides functionality for reading data from storage, specifically using a method called read.
+
+##### Flowchart
+![LibBytes](https://github.com/code-423n4/2024-03-dittoeth/assets/154236469/ed594a31-cbfd-4efb-97b2-6db3fb610c7a)
+To view full picture, click [here](https://github.com/code-423n4/2024-03-dittoeth/assets/154236469/ed594a31-cbfd-4efb-97b2-6db3fb610c7a)
 
 ## LibOracle.sol
 The `LibOracle` contract is designed to interact with price oracles, specifically Chainlink oracles, to fetch and manipulate price data for various assets. The library is designed to be used within a smart contract system, providing functionalities related to price fetching, circuit breaker mechanisms for price data validation, and utilities for handling price data.
@@ -503,6 +537,11 @@ Solidity
 - `AggregatorV3Interface:` Interface for interacting with Chainlink oracles.
 - `IERC20:` Interface for interacting with ERC20 tokens, used for checking WETH balance in the TWAP calculations.
 - `IDiamond:` Interface for interacting with a diamond contract, which is a pattern for managing contract upgrades and storage.
+
+
+##### Flowchart
+![LibOracle](https://github.com/code-423n4/2024-03-dittoeth/assets/154236469/78599af7-f059-4b3a-b5e0-4c3f02eb7149)
+To view full picture, click [here](https://github.com/code-423n4/2024-03-dittoeth/assets/154236469/78599af7-f059-4b3a-b5e0-4c3f02eb7149)
 
 
 ## LibOrders.sol
@@ -555,6 +594,10 @@ The contract uses several constants defined in the Constants.sol library, such a
 ##### Interfaces:
 - `IDiamond:` An interface for interacting with the Diamond pattern, a design pattern for upgradable contracts.
 
+##### Flowchart
+![LibOrders](https://github.com/code-423n4/2024-03-dittoeth/assets/154236469/f269a1f0-71c3-466e-9425-cb0ea24d785d)
+To view full picture, click [here](https://github.com/code-423n4/2024-03-dittoeth/assets/154236469/f269a1f0-71c3-466e-9425-cb0ea24d785d)
+
 
 ## LibSRUtil.sol
 The contract `LibSRUtil.sol` provides utility functions for managing short records. It involves short selling and yield farming, given the context of collateral, yield rates, and asset management. 
@@ -582,6 +625,9 @@ The contract does not explicitly define roles or access mechanisms.
 - `AppStorage and appStorage:` The global state of the application and a function to access it. This is crucial for managing the state of short records and other data.
 - `LibOrders, LibShortRecord, LibAsset, Errors, LibBridgeRouter:` Other libraries and contracts that `LibSRUtil` interacts with. These provide additional functionality for managing orders, short records, assets, error handling, and bridging between different blockchain networks or contracts.
 
+##### Flowchart
+![LibSRUtil](https://github.com/code-423n4/2024-03-dittoeth/assets/154236469/e4d78022-e373-43c4-92b3-714dde20ab58)
+To view full picture, click [here](https://github.com/code-423n4/2024-03-dittoeth/assets/154236469/e4d78022-e373-43c4-92b3-714dde20ab58)
 
 ## UniswapOracleLibrary.sol
 The `UniswapOracleLibrary.sol` contract is designed to provide utility functions for interacting with Uniswap V3 pools, specifically for calculating token amounts and prices based on pool data. This library is particularly useful for developers looking to integrate Uniswap V3's advanced features, such as concentrated liquidity and time-weighted average price (TWAP) calculations, into their own smart contracts.
@@ -605,6 +651,10 @@ This contract does not define any roles or access mechanisms as it is a library.
 
 ##### Interfaces:
 - `IUniswapV3Pool:` An interface that defines the functions that a Uniswap V3 pool contract must implement. This interface is used to interact with Uniswap V3 pools.
+
+##### Flowchart
+![UniswapOracleLibrary](https://github.com/code-423n4/2024-03-dittoeth/assets/154236469/4939ada5-b5c1-4b28-bce9-33cc371cc18f)
+To view full picture, click [here](https://github.com/code-423n4/2024-03-dittoeth/assets/154236469/4939ada5-b5c1-4b28-bce9-33cc371cc18f)
 
 </details>
 
@@ -760,8 +810,8 @@ In general, The DittoETH’s protocol presents a well-designed architecture. The
 
 
 ## 10. Time Spent
-55 hours
+57 hours
 
 
 ### Time spent:
-55 hours
+57 hours
