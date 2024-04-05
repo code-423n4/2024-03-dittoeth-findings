@@ -1,0 +1,8 @@
+{
+  "contest": 348,
+  "handle": "Myd",
+  "risk": "2",
+  "title": "Concurrent disputes cause inconsistent state updates, compromising redemption mechanism reliability.",
+  "issueId": 232,
+  "issueUrl": "https://github.com/code-423n4/2024-03-dittoeth-findings/issues/232"
+}
