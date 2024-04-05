@@ -1,0 +1,8 @@
+{
+  "contest": 348,
+  "handle": "Bube",
+  "risk": "2",
+  "title": "The `colRedeemed` variable is wrongly retrieved in `LibBytes::readProposalData` function",
+  "issueId": 221,
+  "issueUrl": "https://github.com/code-423n4/2024-03-dittoeth-findings/issues/221"
+}
