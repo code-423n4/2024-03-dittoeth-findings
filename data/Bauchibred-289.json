@@ -1,0 +1,8 @@
+{
+  "contest": 348,
+  "handle": "Bauchibred",
+  "risk": "3",
+  "title": "A user having a bad collateral ratio can just transfer their short to sidestep being liquidated",
+  "issueId": 289,
+  "issueUrl": "https://github.com/code-423n4/2024-03-dittoeth-findings/issues/289"
+}
