@@ -5,6 +5,7 @@
 
 Ditto ETH Protocol is a decentralized finance (DeFi) platform designed to facilitate the creation and trading of synthetic assets pegged to the value of real-world assets. At its core, Ditto ETH employs a unique mechanism that allows users to mint and trade synthetic tokens representing various assets, such as cryptocurrencies, fiat currencies, and commodities, directly on the Ethereum blockchain.
 
+
 The protocol operates by leveraging a collateralized debt position (CDP) model, where users can lock up collateral in the form of Ether (ETH) to mint synthetic tokens known as dETH, which are pegged 1:1 to the value of Ether. These dETH tokens can then be freely traded on decentralized exchanges (DEXs) or used as collateral to mint additional synthetic assets, providing users with exposure to a wide range of assets without needing to hold the underlying assets themselves.
 
 One of the key features of Ditto ETH is its decentralized price oracle system, which continuously updates the prices of synthetic assets based on real-time market data obtained from external sources such as Chainlink and Uniswap. This ensures that the prices of synthetic assets remain accurate and reflective of their real-world counterparts, thereby maintaining the stability and integrity of the platform.
@@ -383,6 +384,8 @@ Through the audit of DittoETH, I gained several new learnings and insights into 
 
 
 Overall, the audit of DittoETH provided valuable insights into the complexities and considerations involved in developing and auditing decentralized finance protocols. These learnings will inform my future work in assessing and improving the security, reliability, and usability of DeFi applications.
+
+
 
 
 
