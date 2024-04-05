@@ -34,7 +34,7 @@ Accordingly, I analyzed and audited the subject in the following steps;
 - - https://www.okx.com/learn/what-is-liquid-staking  
         \- https://www.youtube.com/watch?v=WHjXz6hFUSU
 
-3\. **Code Review**:
+4\. **Code Review**:
 
 &nbsp;          Conducted a line-by-line code review focusing on understanding code functionalities.
 
@@ -42,7 +42,7 @@ Accordingly, I analyzed and audited the subject in the following steps;
             - Identify Access Control Issues: Thoroughly examined the codebase for any access control problems that might allow unauthorized users to execute critical functions.
             - Evaluate Function Execution Order: Checked random sequence of function executions to ensure the protocol's logic cannot be disrupted by changing the order of calls.
 
-**4\. Report Writing**:
+**5\. Report Writing**:
 
 &nbsp;           Write Report by compiling all the insights I gained throughout the line by line code review.
 
@@ -189,6 +189,8 @@ In general, the DittoETH project exhibits an interesting and well-developed arch
 It took me longer than expected because there were some concepts that I needed to understand. If we exclude the time spent on understanding the missing knowledge, I estimate that it would have taken me approximately 34 to 38 hours to complete.
 
 &nbsp;
+
+
 
 ### Time spent:
 35 hours
