@@ -1,0 +1,8 @@
+{
+  "contest": 348,
+  "handle": "d3e4",
+  "risk": "3",
+  "title": "A successfully disputed redemption proposal has still increased the redemption fee base rate; exploit to depeg dUSD",
+  "issueId": 274,
+  "issueUrl": "https://github.com/code-423n4/2024-03-dittoeth-findings/issues/274"
+}
