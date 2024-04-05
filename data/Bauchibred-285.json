@@ -1,0 +1,8 @@
+{
+  "contest": 348,
+  "handle": "Bauchibred",
+  "risk": "2",
+  "title": "Bids not lesser than the minimum bids would wrongly get reverted as bids less than minimum bids due to an overview",
+  "issueId": 285,
+  "issueUrl": "https://github.com/code-423n4/2024-03-dittoeth-findings/issues/285"
+}
