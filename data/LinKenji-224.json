@@ -1,0 +1,8 @@
+{
+  "contest": 348,
+  "handle": "LinKenji",
+  "risk": "2",
+  "title": "Stale cached prices may misprice assets, delay liquidations, and increase risk.",
+  "issueId": 224,
+  "issueUrl": "https://github.com/code-423n4/2024-03-dittoeth-findings/issues/224"
+}
