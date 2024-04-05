@@ -1,0 +1,8 @@
+{
+  "contest": 348,
+  "handle": "emerald7017",
+  "risk": "2",
+  "title": "Inflated `ercDebt` via manipulated `ercDebtRate` disrupts liquidation, causing congestion. Skewed liquidation efforts as liquidators target artificially inflated ShortRecords.",
+  "issueId": 228,
+  "issueUrl": "https://github.com/code-423n4/2024-03-dittoeth-findings/issues/228"
+}
