@@ -1,0 +1,8 @@
+{
+  "contest": 348,
+  "handle": "0xbrett8571",
+  "risk": "2",
+  "title": "Impact: Out-of-bounds access may lead to failed disputes or incorrect resolutions.",
+  "issueId": 204,
+  "issueUrl": "https://github.com/code-423n4/2024-03-dittoeth-findings/issues/204"
+}
