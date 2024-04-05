@@ -1,0 +1,8 @@
+{
+  "contest": 348,
+  "handle": "0xSecuri",
+  "risk": "3",
+  "title": "Incorrect Price Conversion Due to Decimal Precision Discrepancy",
+  "issueId": 189,
+  "issueUrl": "https://github.com/code-423n4/2024-03-dittoeth-findings/issues/189"
+}
