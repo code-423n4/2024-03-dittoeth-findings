@@ -1,0 +1,8 @@
+{
+  "contest": 348,
+  "handle": "0xbepresent",
+  "risk": "2",
+  "title": "The `bridgePointer` is not properly specified in `BridgeRouterFacet::_getVault`.",
+  "issueId": 281,
+  "issueUrl": "https://github.com/code-423n4/2024-03-dittoeth-findings/issues/281"
+}
