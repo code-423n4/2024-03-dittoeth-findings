@@ -1,0 +1,8 @@
+{
+  "contest": 348,
+  "handle": "serial-coder",
+  "risk": "2",
+  "title": "The `shortOrder` verification bug on the `RedemptionFacet::proposeRedemption()` allows an attacker to leave a small `shortOrder` on the order book, leading to the protocol's bad debt",
+  "issueId": 262,
+  "issueUrl": "https://github.com/code-423n4/2024-03-dittoeth-findings/issues/262"
+}
