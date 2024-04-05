@@ -419,5 +419,7 @@ The security the analysis of the DittoETH smart contracts I identified several p
 - Strengthen the validation and sanity checks on the hints provided by users in the hint system.
 - Secure the derivation of the starting short id and prevent its manipulation by external factors.
 
+
+
 ### Time spent:
-8 hours
+18 hours
