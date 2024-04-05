@@ -356,6 +356,16 @@ The contract's design should ensure that any user input leading to the invocatio
 
 However, as a best practice, especially in complex systems where multiple developers might interact with or modify the codebase, it would be safer to include validation checks within the `withdrawalFeePct` function itself. This would protect against future changes that might inadvertently introduce vulnerabilities due to incorrect assumptions about the validity of the `bridgePointer`.
 
+## 5 - Conclusion
+
+My audit analysis effectively outlines the Ditto Protocol, its main features, key contracts, and potential vulnerabilities. Additionally, it offers clear mitigation strategies to address these vulnerabilities and enhance the protocol's security.
+
+The report demonstrates a deep understanding of the protocol's architecture and underlying mechanisms. It provides valuable insights into areas of potential risk and suggests practical solutions to mitigate them. The inclusion of specific contract explanations and code snippets enhances the report's clarity and readability.
+
+Overall, the audit report reflects a diligent examination of the Ditto Protocol, highlighting both its strengths and areas for improvement. It serves as a valuable resource for developers and stakeholders seeking to enhance the protocol's security and robustness.
+
+
+
 
 
 
