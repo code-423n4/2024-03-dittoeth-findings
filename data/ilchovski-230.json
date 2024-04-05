@@ -1,0 +1,8 @@
+{
+  "contest": 348,
+  "handle": "ilchovski",
+  "risk": "2",
+  "title": "proposeRedemption() uses old oracle price",
+  "issueId": 230,
+  "issueUrl": "https://github.com/code-423n4/2024-03-dittoeth-findings/issues/230"
+}
